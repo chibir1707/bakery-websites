@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RK Bakery – Fresh Baked With Love</title>
+  <style>
+/* =========================================
+   RK BAKERY – style.css
+   Warm artisan aesthetic: cream, terracotta,
+   gold accents with editorial typography
+   ========================================= */
+
+/* ─── CSS VARIABLES ─── */
+:root {
+  --cream:      #FDF6EC;
+  --cream-dark: #F5E6CE;
+  --brown:      #3B1F0A;
+  --brown-mid:  #6B3A1F;
+  --terracotta: #C05621;
+  --gold:       #D4952A;
+  --gold-light: #F2C76E;
+  --green-wa:   #25D366;
+  --green-wa-d: #1da851;
+  --white:      #FFFFFF;
+  --gray:       #8B7355;
+  --text:       #2C1A0E;
+  --text-muted: #7A5C3C;
+  --border:     #E8D5B5;
+  --shadow:     rgba(59, 31, 10, 0.1);
+  --radius:     16px;
+  --radius-sm:  10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+a { text-decoration: none; color: inherit; }
+
+ul { list-style: none; }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+.section-tag {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--brown);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--brown);
+  margin-bottom: 0.75rem;
+}
+
+.section-title em { color: var(--terracotta); font-style: italic; }
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 520px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header .section-sub { margin: 0 auto; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--terracotta);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--brown-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,86,33,0.35); }
+
+.btn-whatsapp {
+  background: var(--green-wa);
+  color: var(--white);
+}
+.btn-whatsapp:hover { background: var(--green-wa-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+}
+.btn-outline:hover { background: var(--terracotta); color: var(--white); }
+
+.btn-sm { padding: 0.55rem 1.25rem; font-size: 0.875rem; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ─── NAVBAR ─── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+.navbar.scrolled {
+  background: rgba(253, 246, 236, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px var(--shadow);
+  padding: 0.6rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.logo-rk {
+  background: var(--terracotta);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+.logo-text { font-size: 1.4rem; font-weight: 700; color: var(--brown); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--brown);
+  position: relative;
+  transition: color var(--transition);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--terracotta);
+  transition: width var(--transition);
+  border-radius: 2px;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--terracotta); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--brown);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 7rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+}
+.c1 { width: 500px; height: 500px; background: var(--gold); top: -100px; right: -100px; }
+.c2 { width: 300px; height: 300px; background: var(--terracotta); bottom: 50px; right: 200px; }
+.c3 { width: 200px; height: 200px; background: var(--gold-light); top: 200px; right: 400px; }
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--terracotta);
+  background: rgba(192,86,33,0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  color: var(--brown);
+  margin-bottom: 1.25rem;
+  animation: fadeInUp 0.6s 0.1s ease both;
+}
+
+.hero-sub {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 480px;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s 0.2s ease both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.6s 0.3s ease both;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeInUp 0.6s 0.4s ease both;
+}
+
+.stat { text-align: center; }
+.stat strong { display: block; font-size: 1.5rem; font-family: 'Playfair Display', serif; color: var(--brown); }
+.stat span { font-size: 0.8rem; color: var(--text-muted); }
+
+.stat-divider { width: 1px; height: 40px; background: var(--border); }
+
+/* Cake Illustration */
+.hero-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 1s 0.5s ease both;
+}
+
+.cake-illustration {
+  position: relative;
+  width: 240px;
+  height: 280px;
+}
+
+.cake-plate {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 220px; height: 20px;
+  background: linear-gradient(to bottom, #E8D5B5, #C8A87A);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.cake-body {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.layer3 { bottom: 18px; width: 200px; height: 70px; background: linear-gradient(135deg, #8B4513, #A0522D); }
+.layer2 { bottom: 85px; width: 170px; height: 65px; background: linear-gradient(135deg, #C0392B, #E74C3C); }
+.layer1 { bottom: 147px; width: 140px; height: 60px; background: linear-gradient(135deg, #F1C40F, #F39C12); }
+
+.cake-top {
+  position: absolute;
+  bottom: 205px; left: 50%;
+  transform: translateX(-50%);
+  width: 140px; height: 30px;
+  background: linear-gradient(135deg, #FFEAA7, #FDCB6E);
+  border-radius: 8px 8px 0 0;
+}
+
+.cake-candle {
+  position: absolute;
+  bottom: 235px; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 30px;
+  background: linear-gradient(to bottom, #E84393, #C0392B);
+  border-radius: 3px;
+}
+
+.flame {
+  position: absolute;
+  top: -15px; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 16px;
+  background: linear-gradient(to top, #F39C12, #E74C3C, #FDCB6E);
+  border-radius: 50% 50% 30% 30%;
+  animation: flicker 1s ease-in-out infinite alternate;
+}
+
+.cake-decoration {
+  position: absolute;
+  font-size: 1.4rem;
+  animation: float 3s ease-in-out infinite;
+}
+.d1 { top: 20px; right: 10px; animation-delay: 0s; }
+.d2 { top: 60px; left: 5px; animation-delay: 0.5s; }
+.d3 { top: 100px; right: 0px; animation-delay: 1s; }
+
+/* ─── SEARCH SECTION ─── */
+.search-section {
+  background: var(--brown);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 65px;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.9rem 3rem 0.9rem 3rem;
+  background: var(--cream);
+  border: 2px solid transparent;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  transition: var(--transition);
+  outline: none;
+}
+
+.search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212,149,42,0.15); }
+.search-input::placeholder { color: var(--text-muted); }
+
+.search-clear {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 0.25rem;
+  display: none;
+}
+
+/* ─── PRODUCTS SECTION ─── */
+.products-section { padding: 5rem 0; }
+
+.category-block { margin-bottom: 4rem; }
+
+.category-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--brown);
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Product Card */
+.product-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 16px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(59,31,10,0.18); }
+
+.product-img {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.08), transparent);
+}
+
+.product-label {
+  position: absolute;
+  top: 0.75rem; left: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  background: var(--terracotta);
+  color: white;
+  z-index: 1;
+}
+
+.product-body { padding: 1rem 1.25rem 1.25rem; }
+
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--brown);
+  margin-bottom: 0.3rem;
+}
+
+.product-weight { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  font-family: 'Playfair Display', serif;
+}
+
+.product-order {
+  background: var(--green-wa);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.product-order:hover { background: var(--green-wa-d); transform: scale(1.05); }
+
+/* ─── CUSTOM CAKES BANNER ─── */
+.custom-cakes-banner {
+  background: linear-gradient(135deg, var(--brown) 0%, var(--brown-mid) 100%);
+  border-radius: var(--radius);
+  padding: 2.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-cakes-banner::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  top: -100px; right: 100px;
+}
+
+.custom-content h3 { font-size: 1.8rem; margin-bottom: 0.6rem; }
+.custom-content p { opacity: 0.85; max-width: 400px; margin-bottom: 1.5rem; }
+.custom-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.custom-image { font-size: 6rem; line-height: 1; flex-shrink: 0; }
+
+/* ─── SWEETS SECTION ─── */
+.sweets-section {
+  background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+  padding: 5rem 0;
+}
+
+.sweets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.sweet-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.sweet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(59,31,10,0.15);
+  border-color: var(--gold-light);
+}
+
+.sweet-emoji { font-size: 2.4rem; margin-bottom: 0.5rem; }
+.sweet-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--brown); font-weight: 700; margin-bottom: 0.35rem; }
+.sweet-price { font-size: 0.95rem; color: var(--terracotta); font-weight: 700; margin-bottom: 0.75rem; }
+.sweet-weight { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+.sweet-order {
+  background: var(--green-wa);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+}
+.sweet-order:hover { background: var(--green-wa-d); }
+
+/* ─── ABOUT ─── */
+.about-section { padding: 5rem 0; }
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-visual { position: relative; }
+
+.about-img-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.about-img-placeholder {
+  height: 420px;
+  background: linear-gradient(135deg, var(--brown) 0%, var(--brown-mid) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  border-radius: var(--radius);
+}
+
+.about-badge {
+  position: absolute;
+  top: -1rem; right: -1rem;
+  background: var(--gold);
+  color: var(--brown);
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(212,149,42,0.4);
+  z-index: 1;
+}
+
+.about-floater {
+  position: absolute;
+  bottom: -1rem; left: -1rem;
+  background: var(--white);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 32px var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.about-floater strong { font-size: 1.4rem; color: var(--terracotta); font-family: 'Playfair Display', serif; }
+.about-floater span { font-size: 0.78rem; color: var(--text-muted); }
+
+.about-content p { color: var(--text-muted); margin-bottom: 1rem; font-size: 1.02rem; }
+
+.about-features { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--cream-dark);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.feature > span { font-size: 1.5rem; flex-shrink: 0; }
+.feature strong { display: block; color: var(--brown); font-weight: 600; }
+.feature p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+
+/* ─── GALLERY ─── */
+.gallery-section { padding: 5rem 0; background: var(--cream-dark); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 1rem;
+}
+
+.gallery-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(4) { grid-column: span 2; }
+
+.gallery-thumb {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  transition: transform var(--transition);
+}
+
+.gallery-item:hover .gallery-thumb { transform: scale(1.07); }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(59, 31, 10, 0);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  transition: background var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay { background: rgba(59, 31, 10, 0.55); }
+
+.gallery-label {
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-label { transform: translateY(0); opacity: 1; }
+
+/* ─── REVIEWS ─── */
+.reviews-section { padding: 5rem 0; overflow: hidden; }
+
+.reviews-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+
+.review-card {
+  min-width: 320px;
+  max-width: 360px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: 0 4px 20px var(--shadow);
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  border-left: 4px solid var(--gold);
+}
+
+.review-stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+.review-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 0.75rem; }
+.review-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.review-name { font-weight: 600; color: var(--brown); font-size: 0.9rem; }
+.review-date { font-size: 0.78rem; color: var(--text-muted); }
+
+.reviews-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.dot.active { background: var(--terracotta); width: 24px; border-radius: 4px; }
+
+/* ─── CONTACT ─── */
+.contact-section { padding: 5rem 0; background: var(--cream-dark); }
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-details { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+.contact-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.contact-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+.contact-item strong { display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.2rem; }
+.contact-item p, .contact-item a { color: var(--text-muted); font-size: 0.9rem; }
+.contact-item a:hover { color: var(--terracotta); }
+
+/* Contact Form */
+.contact-form-wrap {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: 0 8px 40px var(--shadow);
+}
+
+.contact-form h3 {
+  font-size: 1.5rem;
+  color: var(--brown);
+  margin-bottom: 1.75rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--brown); margin-bottom: 0.4rem; }
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--cream);
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--gold);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(212,149,42,0.1);
+}
+
+.form-group textarea { resize: vertical; min-height: 110px; }
+
+.field-error { display: block; font-size: 0.78rem; color: #e53e3e; margin-top: 0.3rem; }
+
+.form-success {
+  display: none;
+  background: #f0fff4;
+  color: #276749;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid #9ae6b4;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: var(--brown);
+  color: rgba(255,255,255,0.85);
+  padding: 4rem 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-brand .nav-logo { margin-bottom: 1rem; }
+.footer-brand .logo-text { color: white; }
+.footer-brand p { font-size: 0.88rem; opacity: 0.7; line-height: 1.7; max-width: 240px; margin-bottom: 1.5rem; }
+
+.social-links { display: flex; gap: 0.75rem; }
+.social-link {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: white;
+}
+.social-link:hover { background: var(--terracotta); }
+
+.footer-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+  color: white;
+}
+
+.footer-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col a { font-size: 0.9rem; opacity: 0.7; transition: opacity var(--transition); }
+.footer-col a:hover { opacity: 1; color: var(--gold-light); }
+
+.footer-bottom {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.83rem;
+  opacity: 0.55;
+}
+
+/* ─── FLOATING WHATSAPP ─── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 58px; height: 58px;
+  background: var(--green-wa);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+  z-index: 999;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 10px 36px rgba(37,211,102,0.55); }
+
+.wa-tooltip {
+  position: absolute;
+  right: 70px;
+  background: var(--brown);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+.whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
+/* ─── NO RESULTS ─── */
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* ─── HIDDEN (search filter) ─── */
+.hidden { display: none !important; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes flicker {
+  0%   { transform: translateX(-50%) scaleX(1)   scaleY(1); }
+  100% { transform: translateX(-50%) scaleX(0.8) scaleY(1.1); }
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .about-container { gap: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-links {
+    position: fixed;
+    top: 0; right: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--cream);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: -4px 0 40px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform var(--transition);
+    z-index: 999;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-link { font-size: 1.15rem; }
+  .hamburger { display: flex; z-index: 1000; position: relative; }
+
+  /* Hero */
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 6rem;
+  }
+  .hero-cta { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-sub { margin: 0 auto 2rem; }
+  .hero-visual { order: -1; }
+
+  /* Products */
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+  /* Custom banner */
+  .custom-cakes-banner { flex-direction: column; text-align: center; padding: 2rem; }
+  .custom-image { font-size: 4rem; }
+  .custom-actions { justify-content: center; }
+
+  /* About */
+  .about-container { grid-template-columns: 1fr; }
+  .about-visual { max-width: 400px; margin: 0 auto; }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+
+  /* Contact */
+  .contact-container { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  /* Search */
+  .search-section { top: 56px; }
+}
+
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .sweets-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+}
+
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-rk">RK</span>
+        <span class="logo-text">Bakery</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#cakes" class="nav-link">Cakes</a>
+        <a href="#sweets" class="nav-link">Sweets</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-circle c1"></div>
+      <div class="hero-circle c2"></div>
+      <div class="hero-circle c3"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-badge">✦ Handcrafted Since 2010 ✦</span>
+      <h1 class="hero-title">Baked Fresh<br /><em>With Love</em></h1>
+      <p class="hero-sub">Custom cakes, traditional sweets & fresh cream creations made with the finest ingredients — delivered right to your door in Madurai.</p>
+      <div class="hero-cta">
+        <a href="#cakes" class="btn btn-primary">Explore Menu</a>
+        <a href="https://wa.me/919876543210?text=Hello%20RK%20Bakery!%20I%20would%20like%20to%20place%20an%20order." class="btn btn-whatsapp" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>500+</strong><span>Happy Customers</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>50+</strong><span>Cake Varieties</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>15+</strong><span>Years of Love</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="cake-illustration">
+        <div class="cake-plate"></div>
+        <div class="cake-body layer3"></div>
+        <div class="cake-body layer2"></div>
+        <div class="cake-body layer1"></div>
+        <div class="cake-top"></div>
+        <div class="cake-candle"><div class="flame"></div></div>
+        <div class="cake-decoration d1">🍓</div>
+        <div class="cake-decoration d2">🫐</div>
+        <div class="cake-decoration d3">🍒</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEARCH BAR ===== -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search cakes, sweets…" />
+        <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAKES SECTION ===== -->
+  <section class="products-section" id="cakes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Speciality</span>
+        <h2 class="section-title">Fresh Cream &amp; Butter Cakes</h2>
+        <p class="section-sub">Every cake is baked fresh to order using premium ingredients</p>
+      </div>
+
+      <!-- Butter Cream -->
+      <div class="category-block" id="butter-cream">
+        <h3 class="category-title"><span>🧁</span> Butter Cream Cakes</h3>
+        <div class="products-grid" id="butterGrid">
+          <!-- JS will render these -->
+        </div>
+      </div>
+
+      <!-- Fresh Cream -->
+      <div class="category-block" id="fresh-cream">
+        <h3 class="category-title"><span>🍰</span> Fresh Cream Cakes</h3>
+        <div class="products-grid" id="freshGrid">
+        </div>
+      </div>
+
+      <!-- Custom Cakes -->
+      <div class="custom-cakes-banner">
+        <div class="custom-content">
+          <h3>🎨 Custom Model Cakes</h3>
+          <p>Birthdays, weddings, anniversaries — we craft your dream cake exactly as you imagined it.</p>
+          <div class="custom-actions">
+            <a href="https://wa.me/919876543210?text=Hi!%20I%20want%20a%20custom%20cake." class="btn btn-whatsapp" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Get a Quote
+            </a>
+            <a href="https://instagram.com" class="btn btn-outline" target="_blank">View Designs on Instagram</a>
+          </div>
+        </div>
+        <div class="custom-image">🎂</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SWEETS SECTION ===== -->
+  <section class="sweets-section" id="sweets">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Traditional</span>
+        <h2 class="section-title">Indian Sweets</h2>
+        <p class="section-sub">Authentic recipes passed down through generations — all priced at ₹120 per 250g</p>
+      </div>
+      <div class="sweets-grid" id="sweetsGrid">
+        <!-- JS renders these -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="container about-container">
+      <div class="about-visual">
+        <div class="about-badge">Est. 2010</div>
+        <div class="about-img-wrap">
+          <div class="about-img-placeholder">
+            <span>🏪</span>
+          </div>
+        </div>
+        <div class="about-floater">
+          <strong>4.9 ★</strong>
+          <span>Average Rating</span>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">A Family Tradition<br />Since 2010</h2>
+        <p>RK Bakery started as a small home kitchen in Madurai, born from a grandmother's treasured recipes and a family's passion for baking. Today, we serve thousands of happy customers across the city.</p>
+        <p>Every cake, every sweet, every bite carries the warmth of homemade goodness. We never compromise on quality — using fresh dairy, real fruits, and zero artificial flavors.</p>
+        <div class="about-features">
+          <div class="feature"><span>🥛</span><div><strong>Fresh Ingredients</strong><p>Sourced daily from local farms</p></div></div>
+          <div class="feature"><span>🎂</span><div><strong>Custom Orders</strong><p>Tailored to your exact vision</p></div></div>
+          <div class="feature"><span>🚚</span><div><strong>Home Delivery</strong><p>Across Madurai city</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Our Creations</span>
+        <h2 class="section-title">Gallery</h2>
+        <p class="section-sub">A glimpse of what we create with love every single day</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- JS renders gallery items -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimonials</span>
+        <h2 class="section-title">What Our Customers Say</h2>
+      </div>
+      <div class="reviews-track" id="reviewsTrack">
+        <!-- JS renders reviews -->
+      </div>
+      <div class="reviews-dots" id="reviewsDots"></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-container">
+      <div class="contact-info">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Visit Us or<br />Order Online</h2>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div><strong>Address</strong><p>123, Anna Nagar, Madurai – 625020, Tamil Nadu</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div><strong>Phone</strong><p><a href="tel:+919876543210">+91 98765 43210</a></p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">🕐</span>
+            <div><strong>Hours</strong><p>Mon–Sat: 8 AM – 9 PM<br />Sunday: 9 AM – 7 PM</p></div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div><strong>Email</strong><p><a href="mailto:orders@rkbakery.in">orders@rkbakery.in</a></p></div>
+          </div>
+        </div>
+        <a href="https://wa.me/919876543210?text=Hello%20RK%20Bakery!" class="btn btn-whatsapp" target="_blank" style="margin-top:1.5rem;display:inline-flex;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Us Now
+        </a>
+      </div>
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contactForm" novalidate>
+          <h3>Send Us a Message</h3>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Eg. Rahul Kumar" required />
+            <span class="field-error" id="nameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+            <span class="field-error" id="phoneError"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email (optional)</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message / Order Details</label>
+            <textarea id="message" name="message" rows="4" placeholder="Describe your cake or order requirements…" required></textarea>
+            <span class="field-error" id="messageError"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          <div class="form-success" id="formSuccess">
+            ✅ Thank you! We'll get back to you within 2 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo">
+            <span class="logo-rk">RK</span>
+            <span class="logo-text">Bakery</span>
+          </a>
+          <p>Baked fresh with love since 2010. Your happiness is our sweetest ingredient.</p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com" class="social-link" target="_blank" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/919876543210" class="social-link" target="_blank" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#cakes">Cake Menu</a></li>
+            <li><a href="#sweets">Sweets</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Cakes</h4>
+          <ul>
+            <li><a href="#cakes">Black Forest Cake</a></li>
+            <li><a href="#cakes">Red Velvet Cake</a></li>
+            <li><a href="#cakes">Rasmalai Cake</a></li>
+            <li><a href="#cakes">Rainbow Cake</a></li>
+            <li><a href="#cakes">Custom Cakes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Order Now</h4>
+          <p style="font-size:0.875rem;opacity:0.7;margin-bottom:1rem;">Place your order easily via WhatsApp — we respond within minutes!</p>
+          <a href="https://wa.me/919876543210?text=Hello%20RK%20Bakery!%20I'd%20like%20to%20order." class="btn btn-whatsapp btn-sm" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 RK Bakery, Madurai. All rights reserved. Made with ❤️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919876543210?text=Hello%20RK%20Bakery!%20I'd%20like%20to%20order." class="whatsapp-float" target="_blank" aria-label="Order on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="wa-tooltip">Order Now!</span>
+  </a>
+
+  <!-- No results message -->
+  <div class="no-results" id="noResults" style="display:none;">
+    <p>😔 No items found for "<span id="searchTerm"></span>"</p>
+  </div>
+
+  <script>
+/* =========================================
+   RK BAKERY – script.js
+   All interactive behaviour for the site
+   ========================================= */
+
+'use strict';
+
+// ─── DATA ───────────────────────────────────────────────────────────────────
+
+const butterCreamCakes = [
+  { id: 'bc1', name: 'Vanilla Cake',      price: 400, weight: '1 kg', emoji: '🍦', bg: '#FFF3CD', category: 'Butter Cream' },
+  { id: 'bc2', name: 'Chocolate Cake',    price: 450, weight: '1 kg', emoji: '🍫', bg: '#F5CBA7', category: 'Butter Cream' },
+  { id: 'bc3', name: 'Strawberry Cake',   price: 450, weight: '1 kg', emoji: '🍓', bg: '#FDEDEC', category: 'Butter Cream' },
+  { id: 'bc4', name: 'Butterscotch Cake', price: 450, weight: '1 kg', emoji: '🧈', bg: '#FEF9E7', category: 'Butter Cream' },
+];
+
+const freshCreamCakes = [
+  { id: 'fc1',  name: 'Black Forest Cake',         price: 700,  weight: '1 kg', emoji: '🍒', bg: '#F9EBE0', category: 'Fresh Cream' },
+  { id: 'fc2',  name: 'White Forest Cake',         price: 750,  weight: '1 kg', emoji: '🤍', bg: '#F4F6F7', category: 'Fresh Cream' },
+  { id: 'fc3',  name: 'Butterscotch Cake',         price: 850,  weight: '1 kg', emoji: '🧡', bg: '#FEF9E7', category: 'Fresh Cream' },
+  { id: 'fc4',  name: 'Red Velvet Cake',           price: 850,  weight: '1 kg', emoji: '❤️', bg: '#FDEDEC', category: 'Fresh Cream' },
+  { id: 'fc5',  name: 'Black Currant Cake',        price: 800,  weight: '1 kg', emoji: '🫐', bg: '#F4ECF7', category: 'Fresh Cream' },
+  { id: 'fc6',  name: 'Strawberry Cake',           price: 800,  weight: '1 kg', emoji: '🍓', bg: '#FDEDEC', category: 'Fresh Cream' },
+  { id: 'fc7',  name: 'Blueberry Cake',            price: 850,  weight: '1 kg', emoji: '💙', bg: '#EBF5FB', category: 'Fresh Cream' },
+  { id: 'fc8',  name: 'Red Berry Cake',            price: 850,  weight: '1 kg', emoji: '🍇', bg: '#F5EEF8', category: 'Fresh Cream' },
+  { id: 'fc9',  name: 'Rainbow Cake',              price: 850,  weight: '1 kg', emoji: '🌈', bg: '#FDF2F8', category: 'Fresh Cream' },
+  { id: 'fc10', name: 'Caramel Butterscotch Cake', price: 850,  weight: '1 kg', emoji: '🍮', bg: '#FEF3C7', category: 'Fresh Cream' },
+  { id: 'fc11', name: 'Pistachio Cake',            price: 800,  weight: '1 kg', emoji: '🌿', bg: '#EAFAF1', category: 'Fresh Cream' },
+  { id: 'fc12', name: 'Rasmalai Cake',             price: 1000, weight: '1 kg', emoji: '🍮', bg: '#FFF8DC', category: 'Fresh Cream' },
+];
+
+const sweets = [
+  { id: 's1',  name: 'Laddu',          price: 120, emoji: '🟡', bg: '#FEF9E7' },
+  { id: 's2',  name: 'Jangiri',        price: 120, emoji: '🍩', bg: '#FDF2E9' },
+  { id: 's3',  name: 'Palkova',        price: 120, emoji: '🥛', bg: '#F4F6F7' },
+  { id: 's4',  name: 'Milk Halwa',     price: 120, emoji: '🍯', bg: '#FEF9E7' },
+  { id: 's5',  name: 'Mysore Pak',     price: 120, emoji: '🟨', bg: '#FFFDE7' },
+  { id: 's6',  name: 'Gulab Jamun',    price: 120, emoji: '🔴', bg: '#FDEDEC' },
+  { id: 's7',  name: 'Milk Peda',      price: 120, emoji: '🍬', bg: '#FEF5FB' },
+  { id: 's8',  name: 'Boondi',         price: 120, image: 'images/Rectangle%2016.png', bg: '#FDF2E9' },
+  { id: 's9',  name: 'Mothi Laddu',    price: 120, emoji: '🟤', bg: '#FAD7A0' },
+  { id: 's10', name: 'Horlicks Burfi', price: 120, emoji: '🍫', bg: '#F5CBA7' },
+];
+
+const reviews = [
+  { name: 'Priya Ramesh',   initial: 'P', stars: 5, date: 'May 2025', text: 'The Black Forest cake from RK Bakery was absolutely divine! So fresh, creamy, and perfectly sweet. My son\'s birthday was made extra special.' },
+  { name: 'Karthik Rajan',  initial: 'K', stars: 5, date: 'April 2025', text: 'Ordered the Rasmalai Cake for our anniversary — it was breathtaking! The flavors were authentic and delivery was right on time.' },
+  { name: 'Meena Sundar',   initial: 'M', stars: 5, date: 'April 2025', text: 'Best Mysore Pak in Madurai, hands down! RK Bakery\'s sweets are exactly like homemade. Will keep ordering!' },
+  { name: 'Suresh Kumar',   initial: 'S', stars: 5, date: 'March 2025', text: 'The custom model cake for my daughter\'s graduation was a masterpiece. Everyone at the party was amazed. Thank you RK Bakery!' },
+  { name: 'Lakshmi Priya',  initial: 'L', stars: 5, date: 'March 2025', text: 'Rainbow Cake was stunning and tasted incredible! Ordered for a baby shower — got so many compliments. Very professional service.' },
+  { name: 'Arun Murugan',   initial: 'A', stars: 4, date: 'Feb 2025',  text: 'Very happy with the Red Velvet Cake. Fresh ingredients, great texture. Packaging was neat. Will definitely order again!' },
+];
+
+const galleryItems = [
+  { emoji: '🎂', label: 'Custom Wedding Cake',   bg: 'linear-gradient(135deg,#8B4513,#C05621)' },
+  { emoji: '🍰', label: 'Red Velvet Slice',      bg: 'linear-gradient(135deg,#C0392B,#E74C3C)' },
+  { emoji: '🎁', label: 'Birthday Surprise',     bg: 'linear-gradient(135deg,#9B59B6,#8E44AD)' },
+  { emoji: '🍫', label: 'Chocolate Heaven',      bg: 'linear-gradient(135deg,#4A235A,#7D3C98)' },
+  { emoji: '🌈', label: 'Rainbow Layers',        bg: 'linear-gradient(135deg,#F39C12,#E74C3C)' },
+  { emoji: '🍓', label: 'Strawberry Fresh Cream',bg: 'linear-gradient(135deg,#E91E63,#F06292)' },
+  { emoji: '🧁', label: 'Cupcake Collection',   bg: 'linear-gradient(135deg,#00BCD4,#0097A7)' },
+  { emoji: '🍒', label: 'Black Forest Classic', bg: 'linear-gradient(135deg,#1A1A2E,#16213E)' },
+];
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+
+/**
+ * Build WhatsApp URL for a product order
+ */
+function waLink(item) {
+  const msg = encodeURIComponent(`Hello RK Bakery! 🎂\n\nI'd like to order:\n• ${item.name} – ₹${item.price}${item.weight ? ' / ' + item.weight : ''}\n\nPlease confirm availability and delivery details. Thank you!`);
+  return `https://wa.me/919876543210?text=${msg}`;
+}
+
+/**
+ * Sanitise text for HTML injection
+ */
+function esc(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────────────────────────────
+
+/** Render a single product card (cakes) */
+function renderCakeCard(cake) {
+  return `
+    <article class="product-card reveal" data-name="${cake.name.toLowerCase()}" data-category="${cake.category.toLowerCase()}">
+      <div class="product-img" style="background:${cake.bg};">
+        ${cake.emoji}
+        <span class="product-label">${esc(cake.category)}</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">${esc(cake.name)}</h3>
+        <p class="product-weight">${cake.weight}</p>
+        <div class="product-footer">
+          <span class="product-price">₹${cake.price}</span>
+          <a href="${waLink(cake)}" target="_blank" class="product-order">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Order
+          </a>
+        </div>
+      </div>
+    </article>`;
+}
+
+/** Render a single sweet card */
+function renderSweetCard(sweet) {
+  return `
+    <article class="sweet-card reveal" data-name="${sweet.name.toLowerCase()}" data-category="sweet">
+      <div class="sweet-img">${sweet.image ? `<img src="${sweet.image}" alt="${esc(sweet.name)}" loading="lazy" />` : sweet.emoji}</div>
+      <h3 class="sweet-name">${esc(sweet.name)}</h3>
+      <p class="sweet-weight">per 250g</p>
+      <p class="sweet-price">₹${sweet.price}</p>
+      <a href="${waLink(sweet)}" target="_blank" class="sweet-order">Order on WhatsApp</a>
+    </article>`;
+}
+
+/** Render gallery */
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  grid.innerHTML = galleryItems.map(item => `
+    <div class="gallery-item reveal">
+      <div class="gallery-thumb" style="background:${item.bg}">${item.emoji}</div>
+      <div class="gallery-overlay">
+        <span class="gallery-label">${esc(item.label)}</span>
+      </div>
+    </div>`).join('');
+}
+
+/** Render reviews */
+function renderReviews() {
+  const track = document.getElementById('reviewsTrack');
+  const dotsEl = document.getElementById('reviewsDots');
+  if (!track) return;
+
+  track.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+      <p class="review-text">"${esc(r.text)}"</p>
+      <div class="review-author">
+        <div class="review-avatar">${r.initial}</div>
+        <div>
+          <p class="review-name">${esc(r.name)}</p>
+          <p class="review-date">${r.date}</p>
+        </div>
+      </div>
+    </div>`).join('');
+
+  // Dots
+  if (dotsEl) {
+    dotsEl.innerHTML = reviews.map((_, i) =>
+      `<button class="dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Review ${i + 1}"></button>`
+    ).join('');
+
+    dotsEl.querySelectorAll('.dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.dataset.index);
+        const cardWidth = track.querySelector('.review-card')?.offsetWidth + 24 || 344;
+        track.scrollTo({ left: cardWidth * idx, behavior: 'smooth' });
+        dotsEl.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+      });
+    });
+
+    // Sync dots on scroll
+    track.addEventListener('scroll', () => {
+      const cardWidth = track.querySelector('.review-card')?.offsetWidth + 24 || 344;
+      const idx = Math.round(track.scrollLeft / cardWidth);
+      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    });
+  }
+}
+
+// ─── INITIALISE CONTENT ───────────────────────────────────────────────────────
+
+function initContent() {
+  const butterGrid = document.getElementById('butterGrid');
+  const freshGrid  = document.getElementById('freshGrid');
+  const sweetsGrid = document.getElementById('sweetsGrid');
+
+  if (butterGrid) butterGrid.innerHTML = butterCreamCakes.map(renderCakeCard).join('');
+  if (freshGrid)  freshGrid.innerHTML  = freshCreamCakes.map(renderCakeCard).join('');
+  if (sweetsGrid) sweetsGrid.innerHTML = sweets.map(renderSweetCard).join('');
+
+  renderGallery();
+  renderReviews();
+}
+
+// ─── SEARCH ───────────────────────────────────────────────────────────────────
+
+function initSearch() {
+  const input    = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('searchClear');
+  const noResult = document.getElementById('noResults');
+  const termEl   = document.getElementById('searchTerm');
+
+  if (!input) return;
+
+  function doSearch(query) {
+    const q = query.trim().toLowerCase();
+
+    // Toggle clear button
+    clearBtn.style.display = q ? 'block' : 'none';
+
+    // Show/hide all searchable cards
+    const allCards = document.querySelectorAll('.product-card, .sweet-card');
+    let visibleCount = 0;
+
+    allCards.forEach(card => {
+      const name = card.dataset.name || '';
+      const cat  = card.dataset.category || '';
+      const match = !q || name.includes(q) || cat.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) visibleCount++;
+    });
+
+    // Show/hide category headers based on visible cards in each grid
+    ['butterGrid', 'freshGrid'].forEach(gridId => {
+      const grid   = document.getElementById(gridId);
+      const block  = grid?.closest('.category-block');
+      if (!grid || !block) return;
+      const hasVisible = [...grid.querySelectorAll('.product-card')].some(c => !c.classList.contains('hidden'));
+      block.style.display = hasVisible ? '' : 'none';
+    });
+
+    // No results
+    if (noResult) {
+      noResult.style.display = (!visibleCount && q) ? 'block' : 'none';
+      if (termEl) termEl.textContent = query;
+    }
+  }
+
+  input.addEventListener('input', () => doSearch(input.value));
+
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    doSearch('');
+    input.focus();
+  });
+}
+
+// ─── NAVBAR ───────────────────────────────────────────────────────────────────
+
+function initNavbar() {
+  const navbar   = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile toggle
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks?.classList.toggle('open');
+    document.body.style.overflow = navLinks?.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Close on link click
+  navLinks?.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('open');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Active link on scroll
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const links    = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        active?.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
+
+function initScrollReveal() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  // Observe existing + future elements (MutationObserver for dynamically added cards)
+  function observe() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+  }
+
+  observe();
+
+  const mo = new MutationObserver(observe);
+  mo.observe(document.body, { childList: true, subtree: true });
+}
+
+// ─── CONTACT FORM ─────────────────────────────────────────────────────────────
+
+function initContactForm() {
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (!form) return;
+
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = msg;
+  }
+
+  function clearErrors() {
+    ['nameError', 'phoneError', 'messageError'].forEach(id => showError(id, ''));
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    clearErrors();
+
+    const name    = form.name.value.trim();
+    const phone   = form.phone.value.trim();
+    const message = form.message.value.trim();
+    let valid = true;
+
+    if (!name) {
+      showError('nameError', 'Please enter your name.');
+      valid = false;
+    }
+    if (!phone || !/^[6-9]\d{9}$/.test(phone.replace(/\D/g, ''))) {
+      showError('phoneError', 'Please enter a valid 10-digit mobile number.');
+      valid = false;
+    }
+    if (!message) {
+      showError('messageError', 'Please enter a message or order details.');
+      valid = false;
+    }
+    if (!valid) return;
+
+    // Simulate submission: open WhatsApp with details
+    const waMsg = encodeURIComponent(
+      `Hello RK Bakery! 👋\n\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`
+    );
+
+    // Show success & open WhatsApp
+    if (success) { success.style.display = 'block'; }
+    form.reset();
+
+    setTimeout(() => {
+      window.open(`https://wa.me/919876543210?text=${waMsg}`, '_blank');
+    }, 800);
+
+    setTimeout(() => { if (success) success.style.display = 'none'; }, 5000);
+  });
+}
+
+// ─── SMOOTH SCROLL ────────────────────────────────────────────────────────────
+
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+}
+
+// ─── AUTO-SCROLL REVIEWS ─────────────────────────────────────────────────────
+
+function initAutoScroll() {
+  const track = document.getElementById('reviewsTrack');
+  if (!track) return;
+
+  let interval = setInterval(() => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (track.scrollLeft >= maxScroll - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      const cardWidth = track.querySelector('.review-card')?.offsetWidth + 24 || 344;
+      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+  }, 4000);
+
+  // Pause on hover/touch
+  track.addEventListener('mouseenter', () => clearInterval(interval));
+  track.addEventListener('mouseleave', () => {
+    interval = setInterval(() => {
+      const cardWidth = track.querySelector('.review-card')?.offsetWidth + 24 || 344;
+      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }, 4000);
+  });
+}
+
+// ─── BACK TO TOP ──────────────────────────────────────────────────────────────
+
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.innerHTML = '↑';
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.style.cssText = `
+    position:fixed; bottom:6rem; right:2rem; width:42px; height:42px;
+    background:var(--terracotta); color:white; border:none; border-radius:50%;
+    font-size:1.2rem; cursor:pointer; z-index:998;
+    opacity:0; transform:scale(0.8); transition:all 0.3s ease;
+    box-shadow:0 4px 16px rgba(192,86,33,0.4);
+  `;
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    const show = window.scrollY > 400;
+    btn.style.opacity = show ? '1' : '0';
+    btn.style.transform = show ? 'scale(1)' : 'scale(0.8)';
+    btn.style.pointerEvents = show ? 'auto' : 'none';
+  }, { passive: true });
+
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// ─── BOOT ─────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+  initContent();      // Render all data-driven content first
+  initNavbar();
+  initSearch();
+  initScrollReveal();
+  initContactForm();
+  initSmoothScroll();
+  initAutoScroll();
+  initBackToTop();
+
+  // Initial navbar scroll state
+  if (window.scrollY > 40) {
+    document.getElementById('navbar')?.classList.add('scrolled');
+  }
+
+  console.log('🎂 RK Bakery – Website loaded successfully!');
+});
+
+</script>
+</body>
+</html>
